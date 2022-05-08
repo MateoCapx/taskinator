@@ -1,5 +1,5 @@
 
-    let formEl = document.querySelector("#task-form"); 
+    let formEl = document.querySelector("#save-task"); 
     let tasksToDoEl = document.querySelector("#tasks-to-do"); 
     
 
@@ -17,7 +17,7 @@
                 return false;
             }
 
-            formEl.reset();
+            // formEl.reset();  //  ?????
 
         //package up data as an object
 
@@ -57,3 +57,13 @@
         // add entire list item to list
         tasksToDoEl.appendChild(listItemEl);
     }
+
+
+    // document.querySelector("#task-form > div:nth-child(2) > select")
+
+    // <select name="task-type" class="select-dropdown">
+    //     <option value="" disabled="" selected="">Pick a task type</option>
+    //     <option value="School">School </option>
+    //     <option value="Real Estate">Real Estate</option>
+    //     <option value="Mobile">Mobile</option>
+    //   </select>
