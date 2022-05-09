@@ -2,6 +2,8 @@
     let formEl = document.querySelector("#save-task"); 
     let tasksToDoEl = document.querySelector("#tasks-to-do"); 
     let taskIdCounter= 0;
+    let tasksInProgressEl = document.querySelector("#tasks-in-progress");
+    let tasksCompletedEl = document.querySelector("#tasks-completed");
 
 
 let taskFormHandler = function(event) { 
@@ -19,18 +21,50 @@ let taskFormHandler = function(event) {
 
             // formEl.reset();  //  ?????
 
-        //package up data as an object
 
-            let taskDataObj = {
-                name: taskNameInput,
-                type: taskTypeInput
-            };
+            let isEdit = formEl.hasAttribute("data-task-id"); // " hasAttribute test to see if an element has a specific Attribute"
+                
 
-        // send it as an argument to createTaskEl
-            createTaskEl(taskDataObj);
+                    // has data attribute, so get task id and call function to complete edit process
+                    if (isEdit) {
+                        let taskId = formEl.getAttribute("data-task-id");
+                        completeEditTask(taskNameInput, taskTypeInput, taskId);
+                    } 
+
+                    // no data attribute, so create object as normal and pass to createTaskEl function
+                     //package up data as an object
+                    else {
+                        let taskDataObj = {
+                        name: taskNameInput,
+                        type: taskTypeInput
+                        };
+
+                     // send it as an argument to createTaskEl
+                        createTaskEl(taskDataObj);
+                    }
+       
       }; 
     
     formEl.addEventListener("click", taskFormHandler);
+
+
+
+let completeEditTask = function(taskName, taskType, taskId) {
+        console.log(taskName, taskType, taskId);
+
+                    // find the matching task list item
+            let taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+
+            // set new values
+            taskSelected.querySelector("h3.task-name").textContent = taskName;
+            taskSelected.querySelector("span.task-type").textContent = taskType;
+
+            alert("Task Updated!");
+
+            formEl.removeAttribute("data-task-id");
+            document.querySelector("#save-task").textContent = "Add Task";
+      };
+
 
 
 
@@ -140,7 +174,7 @@ return actionContainerEl;
             pageContentEl.addEventListener("click", taskButtonHandler);
 
 
-
+                // delete task function 
 let deleteTask = function(taskId) {
             let taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
             taskSelected.remove();
@@ -148,6 +182,7 @@ let deleteTask = function(taskId) {
               };
 
 
+              // Edit task function
 let editTask = function(taskId) {
                 console.log("editing task #" + taskId);
               
@@ -168,3 +203,28 @@ let editTask = function(taskId) {
                 formEl.setAttribute("data-task-id", taskId);
 
               };
+
+
+ var taskStatusChangeHandler = function(event) {
+              // get the task item's id
+            var taskId = event.target.getAttribute("data-task-id");
+
+            // get the currently selected option's value and convert to lowercase
+            var statusValue = event.target.value.toLowerCase();
+
+            // find the parent task item element based on the id
+            var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+           
+           
+            if (statusValue === "to do") {
+                tasksToDoEl.appendChild(taskSelected);
+              } 
+              else if (statusValue === "in progress") {
+                tasksInProgressEl.appendChild(taskSelected);
+              } 
+              else if (statusValue === "completed") {
+                tasksCompletedEl.appendChild(taskSelected);
+              }
+ };
+            
+              pageContentEl.addEventListener("change", taskStatusChangeHandler);
