@@ -5,81 +5,140 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Taskinator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <title>Taskmaster Pro</title>
 </head>
 
-
-
 <body>
-    <header>
 
-        <h1 class="page-title"> Taskinator </h1>
-        <!-- <p> Click the button below to add a new task! </p>
-        <button class="btn" id="save-task"> Add Task </button> -->
-
-
-            <!-- Form Input Section.  -->
-<form id="task-form">
-    <div class="form-group">
-
-         <!-- ↓↓↓ First Form Field  -->
-      <input type="text" name="task-name" class="text-input" placeholder="Enter Task Name" />
-    </div>
-    <div class="form-group">
-                 <!-- ↓↓↓ Second Form Field & Choices   -->
-      <select name="task-type" class="select-dropdown">
-        <option value="" disabled selected>Pick a task type</option>
-        <option value="School">School </option>
-        <option value="Real Estate">Real Estate</option>
-        <option value="Mobile">Mobile</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <button class="btn" id="save-task" type="submit">Add Task</button>
-    </div>
-  </form>
-
-
-
-
+   <!--Side Bar Card   -->
+  <div class="row min-vh-100 no-gutters">
+    <header class="col-12 col-lg-3 bg-dark text-light sticky-top d-flex flex-column p-4 p-lg-3">
+      <h1 class="text-center"><span class="oi oi-task d-inline d-lg-none"></span>
+        Taskmaster Pro Edition</h1>
+      <button id="create-task" class="btn btn-block btn-success" data-toggle="modal" data-target="#task-form-modal">Add
+        Task</button>
+      <button id="remove-tasks" class="btn btn-block btn-danger mb-2 mb-md-4"></span>Delete All Tasks</button>
+      <p class="mt-auto d-none d-lg-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas
+        architecto ipsa
+        excepturi aut non laudantium sequi fugit officiis optio deleniti asperiores rem eius laborum maxime blanditiis
+        culpa, quis iste?</p>
     </header>
 
-        <main class="page-content" id="page-content">  
-            <section class="task-list-wrapper">
-                <h2 class="list-title">Tasks To Do</h2>
-                <ul class="task-list" id="tasks-to-do">
-                  <li class="task-item">A task is going to be added soon!</li>
-                </ul>
 
-  
-            </section>
+    
 
-                <!-- Tasks In Progress -->
-        <section class="task-list-wrapper">
-            <h2 class="list-title">Tasks In Progress</h2>
-            <ul class="task-list" id="tasks-in-progress"></ul>
-        </section>
-        
-        <!-- Tasks Completed -->
-        <section class="task-list-wrapper">
-            <h2 class="list-title">Tasks Completed</h2>
-            <ul class="task-list" id="tasks-completed"></ul>
-        </section>
-
-            </main>
-
-        <script src="script.js"></script>
-        </body>
+    <main class="col-12 col-lg-9 d-flex flex-column">
+      <div class="m-5 row justify-content-around">
+        <!--To Do Task Card   -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light d-flex align-items-center">
+              To Do
+            </h4>
+            <ul id="list-toDo" class="list-group list-group-flush">
+            </ul>
+          </div>
+        </div>
 
 
-<footer>
 
-    &copy;2020 by Taskinator
+        <!--In Progess Task Card   -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light d-flex align-items-center">
+              In Progress
+            </h4>
+            <ul id="list-inProgress" class="list-group list-group-flush">
+            </ul>
+          </div>
+        </div>
 
 
-</footer>
+
+        <!-- In Review Task Card  -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light d-flex align-items-center">
+              In Review
+            </h4>
+            <ul id="list-inReview" class="list-group list-group-flush">
+            </ul>
+          </div>
+        </div>
 
 
-</html
 
+        <!-- Done Task Card -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light d-flex align-items-center">
+              Done
+            </h4>
+            <ul id="list-done" class="list-group list-group-flush">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      
+      <!-- Drop Here to Remove Footer -->
+      <footer class="mt-auto" id="trash">
+        <div class="w-100 bg-danger p-3 text-center text-light display-4 bottom-trash">
+          <span class="oi oi-trash mx-auto mb-4"> </span> Drop Here to Remove.
+        </div>
+      </footer>
+    </main>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="task-form-modal" tabindex="-1" role="dialog" aria-labelledby="task-form-modal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="task-form-modal">Add New Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="modalTaskDescription">Task description</label>
+              <textarea class="form-control" id="modalTaskDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="modalDueDate">Due date</label>
+              <input type="text" class="form-control" id="modalDueDate" placeholder="mm/dd/yyyy" autocomplete="off" />
+            </div>
+          </form>
+        </div>
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save Task</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-ui-touch-punch@0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
